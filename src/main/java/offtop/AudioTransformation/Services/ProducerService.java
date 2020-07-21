@@ -17,14 +17,10 @@ public class ProducerService {
     @Autowired
     private KafkaTemplate<String, AudioData> kafkaTemplate;
  
-    // produces and sends message by topic
-    public void sendMessage(String message) {
-       logger.info(String.format(" Producing message -> %s", message));
-       // kafkaTemplate.send(TOPIC, message);
-    }
+   
     public void sendAudioFile(AudioData audioData) {
        kafkaTemplate.send(TOPIC, audioData);
-       logger.info(String.format(" Producing message -> %s", audioData));
+       logger.info(String.format(" Producing audio Data"));
 
     }
 }

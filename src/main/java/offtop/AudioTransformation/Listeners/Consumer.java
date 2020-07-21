@@ -20,15 +20,9 @@ public class Consumer {
 
     @KafkaListener(topics = "outgoingAudioEvent", groupId = "group_Id")
     public void recieveAudioEvent(String message) {
-
         System.out.println("_message: " + 1);
-        
         Map value = new Gson().fromJson(message, Map.class);
-        // logger.info(String.format("The message you entered -> %s", value.toString()));
-
-        
-       consumerService.uploadConsumedAudioData(value);
-       
-        
+        logger.info("\nRecieved audio Bytes");
+       consumerService.uploadConsumedAudioData(value);    
     }
 }

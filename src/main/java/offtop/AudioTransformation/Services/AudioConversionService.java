@@ -37,15 +37,8 @@ public class AudioConversionService {
             
             System.out.println("File created: setting <file> ->incomingAudioEvent");
             audioData.setFilePath(someFile.getAbsolutePath());
-            
-
-            //implement try catch with retry
             postFile.postGCP(audioData);
-
-
             produceAudioData(audioData);//Produce data to python microservice
- 
-            
         }catch (Exception e) {
             System.out.println("Error: " + e);
         }

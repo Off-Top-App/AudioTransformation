@@ -1,9 +1,9 @@
 package offtop.AudioTransformation.Services;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,9 +30,7 @@ public class ConsumerService {
     }
 
 	public void uploadConsumedAudioData(Map consumedIncomingAudioEvent) {
-        
         IncomingAudioEvent incomingAudioEvent  = getIncomingAudioEvent(consumedIncomingAudioEvent);
-        //breaks on line 32
         audioConversionService.writeBytesToFile(incomingAudioEvent);
         
 
