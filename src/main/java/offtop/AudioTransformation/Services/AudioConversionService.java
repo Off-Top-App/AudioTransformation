@@ -3,15 +3,16 @@ package offtop.AudioTransformation.Services;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import offtop.AudioTransformation.Models.AudioData;
 import offtop.AudioTransformation.Models.IncomingAudioEvent;
 
 @Service
 public class AudioConversionService {
+    private final Logger logger = LoggerFactory.getLogger(AudioConversionService.class);
     @Autowired
     UploadAudioService postFile;
 
@@ -33,12 +34,12 @@ public class AudioConversionService {
             fos.write(writeToBytes(audioDataList));
             fos.flush();
             fos.close();
-            System.out.println("File created: setting <file> ->incomingAudioEvent");
+            logger.info("File created: setting <file> ->incomingAudioEvent");
             audioData.setFilePath(someFile.getAbsolutePath());
             postFile.postGCP(audioData);
             produceAudioData(audioData);//Produce data to python microservice
         }catch (Exception e) {
-            System.out.println("Error: " + e);
+            logger.info("Error: " + e);
         }
     }
     byte[] writeToBytes(List<Double> audioData) {
