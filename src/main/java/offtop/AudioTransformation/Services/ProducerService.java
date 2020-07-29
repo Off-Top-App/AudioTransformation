@@ -13,11 +13,9 @@ import org.springframework.stereotype.Service;
 public class ProducerService {
     private static final Logger logger = LoggerFactory.getLogger(ProducerService.class);
     private static final String TOPIC = "IncomingAudioEvent";
- 
     @Autowired
     private KafkaTemplate<String, AudioData> kafkaTemplate;
- 
-   
+
     public void sendAudioFile(AudioData audioData) {
        kafkaTemplate.send(TOPIC, audioData);
        logger.info(String.format(" Producing audio Data"));

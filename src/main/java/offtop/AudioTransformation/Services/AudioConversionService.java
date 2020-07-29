@@ -28,13 +28,11 @@ public class AudioConversionService {
         );
         List<Double> audioDataList = (List<Double>) incomingAudioEvent.getAudioData();
         try {
-            
             File someFile = new File("AudioFile.wav");
             FileOutputStream fos = new FileOutputStream(someFile);
             fos.write(writeToBytes(audioDataList));
             fos.flush();
             fos.close();
-            
             System.out.println("File created: setting <file> ->incomingAudioEvent");
             audioData.setFilePath(someFile.getAbsolutePath());
             postFile.postGCP(audioData);
@@ -42,7 +40,6 @@ public class AudioConversionService {
         }catch (Exception e) {
             System.out.println("Error: " + e);
         }
-        
     }
     byte[] writeToBytes(List<Double> audioData) {
         byte[] result = new byte[audioData.size()];
@@ -51,7 +48,6 @@ public class AudioConversionService {
         }
         return result;  
     }
-    
     public void produceAudioData( AudioData outgoingAudioData ) {
         producer.sendAudioFile(outgoingAudioData);
     }

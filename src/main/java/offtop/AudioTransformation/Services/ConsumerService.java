@@ -15,25 +15,17 @@ import offtop.AudioTransformation.Models.IncomingAudioEvent;
 public class ConsumerService {
     @Autowired 
     AudioConversionService audioConversionService;
-
-
     public IncomingAudioEvent getIncomingAudioEvent(Map incomingAudioEvent) {
-        System.out.println("\n\n\n\nIncoming List<Double>: " + incomingAudioEvent.get("audio_data")+ "\n\n\n\n");
-        
+        System.out.println("\n\n\n\nIncoming List<Double>: " + incomingAudioEvent.get("audio_data")+ "\n");
         return new IncomingAudioEvent(
             (List<Double>) incomingAudioEvent.get("audio_data"),
             ((Double) incomingAudioEvent.get("user_id")).intValue(),
             incomingAudioEvent.get("time_exported").toString(),
             incomingAudioEvent.get("topic").toString()
         );  
-        
     }
-
 	public void uploadConsumedAudioData(Map consumedIncomingAudioEvent) {
         IncomingAudioEvent incomingAudioEvent  = getIncomingAudioEvent(consumedIncomingAudioEvent);
         audioConversionService.writeBytesToFile(incomingAudioEvent);
-        
-
     }
-    
 }

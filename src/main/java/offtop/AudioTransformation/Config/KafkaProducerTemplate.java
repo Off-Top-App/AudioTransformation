@@ -17,7 +17,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import offtop.AudioTransformation.Models.AudioData;
 
 @Configuration
-public class KafkaProducerConfiguration {
+public class KafkaProducerTemplate {
 
     @Value("${spring.kafka.consumer.bootstrap-servers}")
     private String bootstrapServers;
